@@ -9,7 +9,7 @@ function NavAvatar() {
             href="#"
             data-bs-toggle='dropdown'
         >
-           <img src={profileImg} alt="Profile" className='rounded-circle' /> 
+           <img src={profileImg} alt="Profile" className='rounded-circle' width="35"height="40" /> 
             <span className='d-none d-md-block dropdown-toggle ps-2'>Nidhish Jaiswal</span>
         </a>
 
