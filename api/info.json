@@ -66,35 +66,35 @@
     {
       "_id": 1,
       "preview": "../assets/items/product-1.jpg",
-      "name": "Ut inventore ipsa voluptas nulla",
+      "name": "LISS4",
       "price": 64,
       "sold": 124
     },
     {
       "_id": 2,
       "preview": "../assets/items/product-2.jpg",
-      "name": "Exercitationem similique doloremque",
+      "name": "LISS4",
       "price": 46,
       "sold": 98
     },
     {
       "_id": 3,
       "preview": "../assets/items/product-3.jpg",
-      "name": "Doloribus nisi exercitationem",
+      "name": "AWIFS",
       "price": 59,
       "sold": 74
     },
     {
       "_id": 4,
       "preview": "../assets/items/product-4.jpg",
-      "name": "Officiis quaerat sint rerum error",
+      "name": "Sentinel",
       "price": 32,
       "sold": 63
     },
     {
       "_id": 5,
       "preview": "../assets/items/product-5.jpg",
-      "name": "Sit unde debitis delectus repellendus",
+      "name": "AWIFS",
       "price": 79,
       "sold": 41
     }
@@ -103,40 +103,40 @@
     {
       "_id": 1,
       "number": "#2457",
-      "customer": "Brandon Jacob",
-      "product": "At praesentium minu",
+      "customer": "Nidhish Jaiswal",
+      "product": "LISS4",
       "price": 64,
       "status": "Approved"
     },
     {
       "_id": 2,
       "number": "#2147",
-      "customer": "Bridie Kessler",
-      "product": "Blanditiis dolor omnis similique",
+      "customer": "Nidhish Jaiswal",
+      "product": "Sentinel",
       "price": 47,
       "status": "Pending"
     },
     {
       "_id": 3,
       "number": "#2049",
-      "customer": "Ashleigh Langosh",
-      "product": "At recusandae consectetur",
+      "customer": "Nidhish Jaiswal",
+      "product": "LISS4",
       "price": 147,
       "status": "Approved"
     },
     {
       "_id": 4,
       "number": "#2644",
-      "customer": "Angus Grady",
-      "product": "Ut voluptatem id earum et",
+      "customer": "Nidhish Jaiswal",
+      "product": "AWIFS",
       "price": 67,
       "status": "Rejected"
     },
     {
       "_id": 5,
       "number": "#3592",
-      "customer": "Raheem Lehner",
-      "product": "Sunt similique distinctio",
+      "customer": "Nidhish Jaiswal",
+      "product": "Sentinel",
       "price": 135,
       "status": "Approved"
     }

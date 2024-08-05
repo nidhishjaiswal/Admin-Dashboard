@@ -32,7 +32,7 @@ function Card({ card }) {
                         <span
                             className={`${
                                 card.percentage > 0 ? 'text-success' : 'text-danger'
-                            } small pt-1 fw-bold1`}
+                            } small pt-1 fw-bold`}
                             >
                                 {card.percentage > 0
                                     ? card.percentage * 100
