@@ -15,7 +15,7 @@ function Card({ card }) {
             <CardFilter filterChange={handleFilterChange}/>
             <div className="card-body">
                 <h5 className="card-title">
-                    {card.name} <span> / {filter} </span>
+                    {card.name} <span> | {filter} </span>
                 </h5>
 
                 <div className="d-flex align-items-center">
