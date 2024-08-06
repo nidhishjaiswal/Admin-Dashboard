@@ -141,47 +141,47 @@
       "status": "Approved"
     }
   ],
-  "recentactiviy": [
+  "recentactivity": [
     {
       "_id": 1,
       "time": "32 min",
       "color": "text-success",
-      "content": "Quia quae rerum explicabo officiis beatae",
-      "highlight": "explicabo officiis"
+      "content": "Accepted Order from Nidhish Jaiswal",
+      "highlight": "Accepted Order"
     },
     {
       "_id": 2,
       "time": "56 min",
       "color": "text-danger",
-      "content": "Voluptatem blanditiis blanditiis eveniet",
+      "content": "Rejected Order from Nidhish Jaiswal",
       "highlight": ""
     },
     {
       "_id": 3,
       "time": "2 hrs",
       "color": "text-primary",
-      "content": "Voluptates corrupti molestias voluptatem",
+      "content": "In Process Order from Nidhish Jaiswal",
       "highlight": ""
     },
     {
       "_id": 4,
       "time": "1 day",
       "color": "text-info",
-      "content": "Tempore autem saepe occaecati voluptatem tempore",
-      "highlight": "occaecati voluptatem"
+      "content": "Received Order from Nidhish Jaiswal",
+      "highlight": "Order Received"
     },
     {
       "_id": 5,
       "time": "2 days",
       "color": "text-warning",
-      "content": "Est sit eum reiciendis exercitationem",
+      "content": "Pending Order from Nidhish Jaiswal",
       "highlight": ""
     },
     {
       "_id": 6,
       "time": "4 weeks",
       "color": "text-muted",
-      "content": "Dicta dolorem harum nulla eius. Ut quidem quidem sit quas",
+      "content": "No new orders",
       "highlight": ""
     }
   ]

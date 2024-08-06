@@ -5,7 +5,7 @@ function TopSellingItem({item}) {
     <tr>
         <th scope='row'>
             <a href="#">
-                <img src={item.preview} alt="" />
+                <img src={item.preview} alt="NA" />
             </a>
         </th>
         <td>

@@ -13,7 +13,7 @@
         box-shadow: 0px 0px 15px 0px rgba(1,41,112,0.1);
         background: white;
         z-index: 9999;
-        transition: 0.3x;
+        transition: 0.3s;
         visibility: hidden;
         opacity: 0;
     }
