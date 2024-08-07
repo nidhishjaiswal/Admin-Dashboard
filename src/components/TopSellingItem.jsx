@@ -1,7 +1,7 @@
 import React from 'react'
 
 function TopSellingItem({item}) {
-    console.log(item);
+    // console.log(item);
   return (
     <tr>
         <th scope='row'>

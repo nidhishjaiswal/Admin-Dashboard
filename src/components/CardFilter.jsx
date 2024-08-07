@@ -8,8 +8,8 @@ function CardFilter({ filterChange }) {
   const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
-    console.log('Start Date:', startDate);
-    console.log('End Date:', endDate);
+    // console.log('Start Date:', startDate);
+    // console.log('End Date:', endDate);
     if (startDate) {
         filterChange(`${startDate} - ${endDate}`);
       }
