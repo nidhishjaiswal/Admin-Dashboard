@@ -60,7 +60,7 @@ function WebTrafficChart() {
   return (
     <div
         id='trafficChart'
-        style={{minHeight: '400px'}}
+        style={{minHeight: '440px'}}
         className='echart'
     ></div>
   )

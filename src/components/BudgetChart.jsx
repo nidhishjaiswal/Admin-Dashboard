@@ -57,7 +57,7 @@ function BudgetChart() {
   return (
     <div
         id='budgetChart'
-        style={{minHeight: '400px'}}
+        style={{minHeight: '440px'}}
         className='echart'
     ></div>
   )

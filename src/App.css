@@ -66,8 +66,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .dropdown-menu .dropdown-divider{
-  color: #a5c5fe;
-  margin: 0;
+    color: #a5c5fe;
+    margin: 0;
 }
 
 .dropdown-menu .dropdown-item{
@@ -125,7 +125,7 @@ h1,h2,h3,h4,h5,h6{
   }
 }
 
-/* Card */
+/* Cards */
 .card{
   margin-bottom: 30px;
   border: none;
