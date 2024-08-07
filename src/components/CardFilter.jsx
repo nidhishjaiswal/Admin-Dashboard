@@ -38,9 +38,14 @@ function CardFilter({ filterChange }) {
 
   return (
     <div className="filter dropdown">
-      <a href="#" className="icon" data-bs-toggle="dropdown">
-        <i className="bi bi-three-dots"></i>
-      </a>
+      <button
+        className="btn btn-secondary btn-sm"
+        type="button"
+        // id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+      >
+        Filter <i className="bi bi-filter"></i>  
+      </button>
       <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
         <li className="dropdown-header text-start">
           <h6>Filter</h6>

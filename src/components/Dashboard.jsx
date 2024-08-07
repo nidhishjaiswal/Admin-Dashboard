@@ -7,6 +7,7 @@ import TopSelling from './TopSelling';
 import RecentActivity from './RecentActivity';
 import BudgetReport from './BudgetReport';
 import WebTraffic from './WebTraffic';
+import CardFilter from './CardFilter';
 
 function Dashboard() {
     const [cards, setCards] = useState([])
@@ -27,6 +28,9 @@ function Dashboard() {
   return (
     <section className="dashboard section">
         <div className="row">
+            <div className="">
+                <CardFilter />
+            </div>
             <div className="col-lg-8">
                 <div className="row">
                     {
