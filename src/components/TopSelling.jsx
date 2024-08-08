@@ -25,11 +25,11 @@ function TopSelling() {
 
   return (
     <div className="card top-selling overflow-auto">
-        <CardFilter filterChange={handleFilterChange} />
+        {/* <CardFilter filterChange={handleFilterChange} /> */}
 
         <div className="card-body pb-0">
             <h5 className="card-title">
-                Top Selling <span>| {filter}</span>
+                Top Selling
             </h5>
             <table className="table table-borderless">
                 <thead className="table-light">

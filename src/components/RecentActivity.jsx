@@ -27,11 +27,11 @@ function RecentActivity() {
 
   return (
     <div className="card">
-        <CardFilter filterChange={handleFilterChange}/>
+        {/* <CardFilter filterChange={handleFilterChange}/> */}
 
         <div className="card-body">
             <h5 className="card-title">
-                Recent Activity <span>| {filter}</span>
+                Recent Activity
             </h5>
 
             <div className="activity">

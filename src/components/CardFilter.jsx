@@ -6,6 +6,9 @@ function CardFilter({ filterChange }) {
   const [showCustomRange, setShowCustomRange] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [today, settoday] = useState(null);
+  const [thismonth, setthismonth] = useState(null);
+  const [thisyear, setthisyear] = useState(null);
 
   useEffect(() => {
     // console.log('Start Date:', startDate);
@@ -14,6 +17,10 @@ function CardFilter({ filterChange }) {
         filterChange(`${startDate} - ${endDate}`);
       }
   }, [startDate, endDate]);
+
+  let date = new Date();
+  console.log(date);
+
 
   const handleCustomRangeClick = (e) => {
     e.preventDefault(); // Prevent default link behavior
@@ -36,6 +43,27 @@ function CardFilter({ filterChange }) {
     }
   };
 
+  const handleDate = (value) => {
+    filterChange(value);
+    const date = new Date();
+
+    if (value === 'Today') {
+      const todayStart = new Date(date);
+      todayStart.setHours(0, 0, 0, 0);
+      const todayEnd = new Date(date);
+      todayEnd.setHours(23, 59, 59, 999);
+      settoday({ start: todayStart, end: todayEnd });
+    } else if (value === 'This Month') {
+      const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
+      const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999);
+      setthismonth({ start: monthStart, end: monthEnd });
+    } else if (value === 'This Year') {
+      const yearStart = new Date(date.getFullYear(), 0, 1);
+      const yearEnd = new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999);
+      setthisyear({ start: yearStart, end: yearEnd });
+    }
+  }
+
   return (
     <div className="filter dropdown">
       <button
@@ -53,7 +81,7 @@ function CardFilter({ filterChange }) {
         <li>
           <a
             className="dropdown-item"
-            onClick={() => filterChange('Today')}
+            onClick={() => handleDate('Today')}
           >
             Today
           </a>
@@ -61,7 +89,7 @@ function CardFilter({ filterChange }) {
         <li>
           <a
             className="dropdown-item"
-            onClick={() => filterChange('This Month')}
+            onClick={() => handleDate('This Month')}
           >
             This Month
           </a>
@@ -69,7 +97,7 @@ function CardFilter({ filterChange }) {
         <li>
           <a
             className="dropdown-item"
-            onClick={() => filterChange('This Year')}
+            onClick={() => handleDate('This Year')}
           >
             This Year
           </a>
