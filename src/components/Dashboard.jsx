@@ -59,7 +59,7 @@ function Dashboard() {
         }
     }
 
-// console.log(count, "this is our deliverd count");
+    // console.log(count, "this is our deliverd count");
     const fetchData = () => {
         try{
             fetch('http://localhost:4000/cards')
@@ -78,11 +78,15 @@ function Dashboard() {
         orderData();
     }, []);
 
+    const handleFilterChange = (dates) => {
+        const [startDate, endDate] = dates.split(' - ');
+    }
+
   return (
     <section className="dashboard section">
         <div className="row">
             <div className="">
-                <CardFilter />
+                <CardFilter filterChange={handleFilterChange}/>
             </div>
             <div className="col-lg-8">
                 <div className="row">
