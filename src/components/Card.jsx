@@ -12,7 +12,7 @@ function Card({name, totalsales}) {
   return(
     <div className="col-xxl-4 col-md-6">
         <div className="card info-card sales-card">
-            {/* <CardFilter filterChange={handleFilterChange}/> */}
+            <CardFilter filterChange={handleFilterChange}/>
             <div className="card-body">
                 <h5 className="card-title">
                     {/* {card.name} */}

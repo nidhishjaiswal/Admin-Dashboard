@@ -37,7 +37,7 @@ function Dashboard() {
             
             if (item.status === 'Approved') {
                 count++;
-                console.log(item.total_amount);
+                // console.log(item.total_amount);
             }
             // Ensure total_amount is a number before adding it to totalAmount
         const amount = (parseFloat(item.total_amount));
@@ -49,7 +49,7 @@ function Dashboard() {
         setApprovedcount(count)
         
         // console.log('Approved count:', count); // Log the count to verify
-        console.log('Total Amount:', new Intl.NumberFormat('en-IN').format(totalAmount)); // Log the total amount to verify
+        // console.log('Total Amount:', new Intl.NumberFormat('en-IN').format(totalAmount)); // Log the total amount to verify
         // console.log('Total Amount:', Number(totalAmount).toFixed(2)); // Log the total amount to verify
 
         setTotalAmount(totalAmount);
