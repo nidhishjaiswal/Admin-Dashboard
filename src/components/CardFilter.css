@@ -24,7 +24,7 @@
 .btn{
   position: relative;
   margin: 75px 40px 0 0;
-  z-index: 99999;
+  z-index: 998;
 }
 
 .dropdown-menu .dropdown-item {
