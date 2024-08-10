@@ -10,6 +10,7 @@ import WebTraffic from './WebTraffic';
 import CardFilter from './CardFilter';
 import moment from 'moment';
 import axios from 'axios';
+import Clock from './Clock';
 
 function Dashboard() {
     const [cards, setCards] = useState([]);
@@ -90,6 +91,7 @@ function Dashboard() {
         setEndDate(endDate);
     };
 
+
     return (
         <section className="dashboard section">
             <div className="row">
@@ -100,7 +102,10 @@ function Dashboard() {
                         </h5>
                     }
                 </div>
-                <div className="">
+                <div className="d-flex justify-content-end mb-1">
+                    <h5>
+                        <Clock/>
+                    </h5>
                     <CardFilter filterChange={handleFilterChange} />
                 </div>
                 <div className="col-lg-8">
