@@ -1,0 +1,100 @@
+{
+    "satelite": {
+      "free": {
+        "LISS4": {
+          "requested": 50,
+          "approved": 20,
+          "pending": 15,
+          "rejected": 15
+        },
+        "Sentinel": {
+          "requested": 40,
+          "approved": 15,
+          "pending": 10,
+          "rejected": 15
+        },
+        "AWIFS": {
+          "requested": 30,
+          "approved": 10,
+          "pending": 10,
+          "rejected": 10
+        }
+      },
+      "paid": {
+        "LISS4": {
+          "requested": 60,
+          "approved": 30,
+          "pending": 20,
+          "rejected": 10
+        },
+        "Sentinel": {
+          "requested": 50,
+          "approved": 20,
+          "pending": 20,
+          "rejected": 10
+        },
+        "AWIFS": {
+          "requested": 45,
+          "approved": 15,
+          "pending": 15,
+          "rejected": 15
+        }
+      }
+    },
+    "vector": {
+      "free": {
+        "point": {
+          "requested": 25,
+          "approved": 10,
+          "pending": 8,
+          "rejected": 7
+        },
+        "line": {
+          "requested": 35,
+          "approved": 15,
+          "pending": 10,
+          "rejected": 10
+        },
+        "polygon": {
+          "requested": 40,
+          "approved": 20,
+          "pending": 10,
+          "rejected": 10
+        }
+      },
+      "paid": {
+        "point": {
+          "requested": 15,
+          "approved": 5,
+          "pending": 5,
+          "rejected": 5
+        },
+        "line": {
+          "requested": 20,
+          "approved": 10,
+          "pending": 5,
+          "rejected": 5
+        },
+        "polygon": {
+          "requested": 25,
+          "approved": 15,
+          "pending": 5,
+          "rejected": 5
+        }
+      }
+    },
+    "online": {
+      "free": {
+        "requested": 30,
+        "approved": 15,
+        "pending": 10,
+        "rejected": 5
+      },
+      "paid": {
+        "requested": 20,
+        "approved": 10,
+        "pending": 5,
+        "rejected": 5
+      }
+    }
+  }
