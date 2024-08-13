@@ -110,9 +110,11 @@ function Dashboard() {
                 </div>
                 <div className="col-lg-8">
                     <div className="row">
-                        <Card name={"Sales"} totalsales={approvedCount} />
-                        <Card name={"Revenue"} totalsales={(new Intl.NumberFormat('en-IN').format(totalAmount.toFixed(2)))} />
-                        <Card name={"Customers"} totalsales={filteredData.length} />
+                        <Card name={"Satellite"} totalsales={approvedCount} />
+                        <Card name={"Vector"} totalsales={(new Intl.NumberFormat('en-IN').format(totalAmount.toFixed(2)))} />
+                        <Card name={"Online"} totalsales={filteredData.length} />
+                        <Card className="satellitedets" name={"Free"} totalsales={filteredData.length} />
+                        <Card className="satellitedets" name={"Paid"} totalsales={filteredData.length} />
                         <div className="col-12">
                             <Reports />
                         </div>

@@ -1,5 +1,6 @@
 .dashboard .info-card{
     padding-bottom: 10px;
+    cursor: pointer;
 }
 
 .dashboard .info-card h6{
