@@ -4,7 +4,7 @@
     top: 15px;
 }
 
-.dashboard .filter .icon{
+.dashboard .filter .icon {
     color: #aab7cf;
     padding-right: 20px;
     padding-bottom: 5px;
@@ -13,15 +13,15 @@
 }
 
 .dashboard .filter .icon:hover,
-.dashboard .filter .icon:focus{
+.dashboard .filter .icon:focus {
     color: #4154f1;
 }
 
-.dashboard .filter .dropdown-header{
+.dashboard .filter .dropdown-header {
     padding: 8px 15px;
 }
 
-.dashboard .filter .dropdown-header h6{
+.dashboard .filter .dropdown-header h6 {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 600;
@@ -31,6 +31,12 @@
     padding: 0;
 }
 
-.dashboard .filter .dropdown-item{
+.dashboard .filter .dropdown-item {
     padding: 8px 15px;
+}
+
+.dashboard .highlighted-card {
+    border: 2px solid #4154f1; /* Blue border */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: all 0.3s ease-in-out;
 }

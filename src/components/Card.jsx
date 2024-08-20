@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import './card.css';
 import CardFilter from './CardFilter';
 
-function Card({ name, totalsales, onClick }) {
+function Card({ name, totalsales, onClick, isSelected }) {
 
     const [filter, setFilter] = useState('Today');
     const handleFilterChange = filter => {
         setFilter(filter);
-    }
+    };
 
     return (
         <div className="col-xxl-4 col-md-6">
-            <div className="card info-card sales-card" onClick={onClick} style={{ cursor: 'pointer' }}>
+            <div
+                className={`card info-card sales-card ${isSelected ? 'selected' : ''}`} 
+                onClick={onClick}
+                style={{ cursor: 'pointer' }}
+            >
                 <div className="card-body">
                     <h5 className="card-title">
                         {name}
