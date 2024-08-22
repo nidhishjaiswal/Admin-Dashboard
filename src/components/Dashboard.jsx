@@ -53,21 +53,7 @@ function Dashboard() {
         }
     };
 
-    // const fetchData = () => {
-    //     try {
-    //         fetch('http://localhost:4000/cards')
-    //             .then((res) => res.json())
-    //             .then((data) => {
-    //                 setCards(data);
-    //             })
-    //             .catch((e) => console.log(e.message));
-    //     } catch (e) {
-    //         console.log(e.message);
-    //     }
-    // };
-
     useEffect(() => {
-        // fetchData();
         orderData();
     }, []);
 
@@ -118,6 +104,12 @@ function Dashboard() {
             vector: false,
             online: false,
         }));
+        // Reset sub-cards when switching main cards
+        setHighlightedSubCards((prev) => ({
+            ...prev,
+            satelliteFree: false,
+            satellitePaid: false,
+        }));
     };
 
     const handleVectorClick = () => {
@@ -125,6 +117,11 @@ function Dashboard() {
             satellite: false,
             vector: !prev.vector,
             online: false,
+        }));
+        setHighlightedSubCards((prev) => ({
+            ...prev,
+            vectorFree: false,
+            vectorPaid: false,
         }));
     };
 
@@ -134,13 +131,19 @@ function Dashboard() {
             vector: false,
             online: !prev.online,
         }));
+        setHighlightedSubCards((prev) => ({
+            ...prev,
+            onlineFree: false,
+            onlinePaid: false,
+        }));
     };
 
     // Sub-card click handlers
     const handleSubCardClick = (parentCard, subCard) => {
         setHighlightedSubCards((prev) => ({
             ...prev,
-            [`${parentCard}${subCard}`]: !prev[`${parentCard}${subCard}`],
+            [`${parentCard}Free`]: subCard === 'Free' ? !prev[`${parentCard}Free`] : false,
+            [`${parentCard}Paid`]: subCard === 'Paid' ? !prev[`${parentCard}Paid`] : false,
         }));
     };
 
@@ -167,151 +170,152 @@ function Dashboard() {
                 </div>
                 <div className="d-flex justify-content-end mb-1">
                     <h5>
-                        <Clock/>
+                        <Clock />
                     </h5>
                     <CardFilter filterChange={handleFilterChange} />
                 </div>
                 <div className="col-lg-8">
+                    {/* Main Cards in a Single Row */}
                     <div className="row">
-                        {/* Satellite Main Card */}
                         <Card
-                            className={`satellitemain`}
+                            className={`satellitemain col-4`}
                             name={"Satellite"}
                             totalsales={approvedCount}
                             onClick={handleSatelliteClick}
                             isSelected={highlightedCards.satellite}
                         />
-                        {highlightedCards.satellite && (
-                            <>
-                                <div style={{ marginLeft: '20px' }} className="row ml-4">
-                                    <Card
-                                        className={`satellitedets col-4`}
-                                        name={"Free"}
-                                        totalsales={filteredData.length}
-                                        onClick={() => handleSubCardClick('satellite', 'Free')}
-                                        isSelected={highlightedSubCards.satelliteFree}
-                                    />
-                                    
-                                    {highlightedSubCards.satelliteFree && (
-                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
-                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
-                                        </div>
-                                    )}
-                                    <Card
-                                        className={`satellitedets col-4`}
-                                        name={"Paid"}
-                                        totalsales={filteredData.length}
-                                        onClick={() => handleSubCardClick('satellite', 'Paid')}
-                                        isSelected={highlightedSubCards.satellitePaid}
-                                    />
-                                    {highlightedSubCards.satellitePaid && (
-                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
-                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
-                                        </div>
-                                    )}
-                                </div>
-                            </>
-                        )}
-
-                        {/* Vector Main Card */}
                         <Card
-                            className={`vectormain`}
+                            className={`vectormain col-4`}
                             name={"Vector"}
                             totalsales={(new Intl.NumberFormat('en-IN').format(totalAmount.toFixed(2)))}
                             onClick={handleVectorClick}
                             isSelected={highlightedCards.vector}
                         />
-                        {highlightedCards.vector && (
-                            <>
-                                <div style={{ marginLeft: '20px' }} className="row ml-4">
-                                    <Card
-                                        className={`vectordets col-4`}
-                                        name={"Free"}
-                                        totalsales={filteredData.length}
-                                        onClick={() => handleSubCardClick('vector', 'Free')}
-                                        isSelected={highlightedSubCards.vectorFree}
-                                    />
-                                    {highlightedSubCards.vectorFree && (
-                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
-                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
-                                        </div>
-                                    )}
-                                    <Card
-                                        className={`vectordets col-4`}
-                                        name={"Paid"}
-                                        totalsales={filteredData.length}
-                                        onClick={() => handleSubCardClick('vector', 'Paid')}
-                                        isSelected={highlightedSubCards.vectorPaid}
-                                    />
-                                    {highlightedSubCards.vectorPaid && (
-                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
-                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
-                                        </div>
-                                    )}
-                                </div>
-                            </>
-                        )}
-
-                        {/* Online Main Card */}
                         <Card
-                            className={`onlinemain`}
+                            className={`onlinemain col-4`}
                             name={"Online"}
                             totalsales={filteredData.length}
                             onClick={handleOnlineClick}
                             isSelected={highlightedCards.online}
                         />
-                        {highlightedCards.online && (
-                            <>
-                                <div style={{ marginLeft: '20px' }} className="row ml-4">
-                                    <Card
-                                        className={`onlinedets col-4`}
-                                        name={"Free"}
-                                        totalsales={filteredData.length}
-                                        onClick={() => handleSubCardClick('online', 'Free')}
-                                        isSelected={highlightedSubCards.onlineFree}
-                                    />
-                                    {highlightedSubCards.onlineFree && (
-                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
-                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
-                                        </div>
-                                    )}
-                                    <Card
-                                        className={`onlinedets col-4`}
-                                        name={"Paid"}
-                                        totalsales={filteredData.length}
-                                        onClick={() => handleSubCardClick('online', 'Paid')}
-                                        isSelected={highlightedSubCards.onlinePaid}
-                                    />
-                                    {highlightedSubCards.onlinePaid && (
-                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
-                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
-                                        </div>
-                                    )}
-                                </div>
-                            </>
-                        )}
+                    </div>
 
-                        <div className="col-12">
-                            <Reports />
+                    {/* Sub-Cards for Satellite */}
+                    {highlightedCards.satellite && (
+                        <div className="row ml-4" style={{ marginLeft: '20px' }}>
+                            <Card
+                                className={`satellitedets col-6`}
+                                name={"Free"}
+                                totalsales={filteredData.length}
+                                onClick={() => handleSubCardClick('satellite', 'Free')}
+                                isSelected={highlightedSubCards.satelliteFree}
+                            />
+                            <Card
+                                className={`satellitedets col-6`}
+                                name={"Paid"}
+                                totalsales={filteredData.length}
+                                onClick={() => handleSubCardClick('satellite', 'Paid')}
+                                isSelected={highlightedSubCards.satellitePaid}
+                            />
                         </div>
-                        <div className="col-12">
-                            <RecentSales />
+                    )}
+
+                    {highlightedSubCards.satelliteFree && (
+                        <div className="row ml-4" style={{ marginLeft: '60px' }}>
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
-                        <div className="col-12">
-                            <TopSelling />
+                    )}
+
+                    {highlightedSubCards.satellitePaid && (
+                        <div className="row ml-4" style={{ marginLeft: '60px' }}>
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
+                    )}
+
+                    {/* Sub-Cards for Vector */}
+                    {highlightedCards.vector && (
+                        <div className="row ml-4" style={{ marginLeft: '20px' }}>
+                            <Card
+                                className={`vectordets col-6`}
+                                name={"Free"}
+                                totalsales={filteredData.length}
+                                onClick={() => handleSubCardClick('vector', 'Free')}
+                                isSelected={highlightedSubCards.vectorFree}
+                            />
+                            <Card
+                                className={`vectordets col-6`}
+                                name={"Paid"}
+                                totalsales={filteredData.length}
+                                onClick={() => handleSubCardClick('vector', 'Paid')}
+                                isSelected={highlightedSubCards.vectorPaid}
+                            />
+                        </div>
+                    )}
+
+                    {highlightedSubCards.vectorFree && (
+                        <div className="row ml-4" style={{ marginLeft: '60px' }}>
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                        </div>
+                    )}
+
+                    {highlightedSubCards.vectorPaid && (
+                        <div className="row ml-4" style={{ marginLeft: '60px' }}>
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                        </div>
+                    )}
+
+                    {/* Sub-Cards for Online */}
+                    {highlightedCards.online && (
+                        <div className="row ml-4" style={{ marginLeft: '20px' }}>
+                            <Card
+                                className={`onlinedets col-6`}
+                                name={"Free"}
+                                totalsales={filteredData.length}
+                                onClick={() => handleSubCardClick('online', 'Free')}
+                                isSelected={highlightedSubCards.onlineFree}
+                            />
+                            <Card
+                                className={`onlinedets col-6`}
+                                name={"Paid"}
+                                totalsales={filteredData.length}
+                                onClick={() => handleSubCardClick('online', 'Paid')}
+                                isSelected={highlightedSubCards.onlinePaid}
+                            />
+                        </div>
+                    )}
+
+                    {highlightedSubCards.onlineFree && (
+                        <div className="row ml-4" style={{ marginLeft: '60px' }}>
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                        </div>
+                    )}
+
+                    {highlightedSubCards.onlinePaid && (
+                        <div className="row ml-4" style={{ marginLeft: '60px' }}>
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                        </div>
+                    )}
+
+                    <div className="col-12">
+                        <Reports />
+                    </div>
+                    <div className="col-12">
+                        <RecentSales />
+                    </div>
+                    <div className="col-12">
+                        <TopSelling />
                     </div>
                 </div>
                 <div className="col-lg-4">
