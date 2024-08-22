@@ -1,3 +1,100 @@
+.dashboard {
+    padding: 20px;
+    position: relative; /* Ensure relative positioning for the filter */
+}
+
+.section {
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-lg-8 {
+    flex: 0 0 66.6667%;
+    max-width: 66.6667%;
+}
+
+.col-lg-4 {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+/* Fixed Position Cards */
+.main-cards-container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 100px; /* Adjust this value to position the cards vertically */
+    left: 20px; /* Adjust this value to position the cards horizontally */
+    z-index: 1000;
+}
+
+.main-card {
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.sub-cards-container {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+/* Sub Cards */
+.satellitedets, .vectordets, .onlinedets {
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-left: 40px;
+}
+
+.satellitedets, .vectordets, .onlinedets,
+.awifs, .sentinel, .liss4 {
+    display: none;
+}
+
+/* Display Sub Cards When Selected */
+.main-card.selected + .sub-cards-container {
+    display: block;
+}
+
+/* Display Nested Sub Cards */
+.sub-cards-container .selected + .nested-sub-cards-container {
+    display: block;
+}
+
+.nested-sub-cards-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+/* Highlighted Card Styles */
+.dashboard .highlighted-card {
+    border: 2px solid #4154f1; /* Blue border */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.020);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Filter Position */
 .dashboard .filter {
     position: absolute;
     right: 0px;
@@ -33,15 +130,4 @@
 
 .dashboard .filter .dropdown-item {
     padding: 8px 15px;
-}
-
-.dashboard .highlighted-card {
-    border: 2px solid #4154f1; /* Blue border */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    transition: all 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: scale(1.020);
-    transition: all 0.3s ease-in-out;
 }

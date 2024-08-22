@@ -53,21 +53,21 @@ function Dashboard() {
         }
     };
 
-    const fetchData = () => {
-        try {
-            fetch('http://localhost:4000/cards')
-                .then((res) => res.json())
-                .then((data) => {
-                    setCards(data);
-                })
-                .catch((e) => console.log(e.message));
-        } catch (e) {
-            console.log(e.message);
-        }
-    };
+    // const fetchData = () => {
+    //     try {
+    //         fetch('http://localhost:4000/cards')
+    //             .then((res) => res.json())
+    //             .then((data) => {
+    //                 setCards(data);
+    //             })
+    //             .catch((e) => console.log(e.message));
+    //     } catch (e) {
+    //         console.log(e.message);
+    //     }
+    // };
 
     useEffect(() => {
-        fetchData();
+        // fetchData();
         orderData();
     }, []);
 
@@ -183,33 +183,34 @@ function Dashboard() {
                         />
                         {highlightedCards.satellite && (
                             <>
-                                <div style={{ marginLeft: '20px' }}>
+                                <div style={{ marginLeft: '20px' }} className="row ml-4">
                                     <Card
-                                        className={`satellitedets`}
+                                        className={`satellitedets col-4`}
                                         name={"Free"}
                                         totalsales={filteredData.length}
                                         onClick={() => handleSubCardClick('satellite', 'Free')}
                                         isSelected={highlightedSubCards.satelliteFree}
                                     />
+                                    
                                     {highlightedSubCards.satelliteFree && (
-                                        <div style={{ marginLeft: '40px' }}>
-                                            <Card className="awifs" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
+                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                                         </div>
                                     )}
                                     <Card
-                                        className={`satellitedets`}
+                                        className={`satellitedets col-4`}
                                         name={"Paid"}
                                         totalsales={filteredData.length}
                                         onClick={() => handleSubCardClick('satellite', 'Paid')}
                                         isSelected={highlightedSubCards.satellitePaid}
                                     />
                                     {highlightedSubCards.satellitePaid && (
-                                        <div style={{ marginLeft: '40px' }}>
-                                            <Card className="awifs" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
+                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                                         </div>
                                     )}
                                 </div>
@@ -226,33 +227,33 @@ function Dashboard() {
                         />
                         {highlightedCards.vector && (
                             <>
-                                <div style={{ marginLeft: '20px' }}>
+                                <div style={{ marginLeft: '20px' }} className="row ml-4">
                                     <Card
-                                        className={`vectordets`}
+                                        className={`vectordets col-4`}
                                         name={"Free"}
                                         totalsales={filteredData.length}
                                         onClick={() => handleSubCardClick('vector', 'Free')}
                                         isSelected={highlightedSubCards.vectorFree}
                                     />
                                     {highlightedSubCards.vectorFree && (
-                                        <div style={{ marginLeft: '40px' }}>
-                                            <Card className="awifs" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
+                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                                         </div>
                                     )}
                                     <Card
-                                        className={`vectordets`}
+                                        className={`vectordets col-4`}
                                         name={"Paid"}
                                         totalsales={filteredData.length}
                                         onClick={() => handleSubCardClick('vector', 'Paid')}
                                         isSelected={highlightedSubCards.vectorPaid}
                                     />
                                     {highlightedSubCards.vectorPaid && (
-                                        <div style={{ marginLeft: '40px' }}>
-                                            <Card className="awifs" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
+                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                                         </div>
                                     )}
                                 </div>
@@ -269,33 +270,33 @@ function Dashboard() {
                         />
                         {highlightedCards.online && (
                             <>
-                                <div style={{ marginLeft: '20px' }}>
+                                <div style={{ marginLeft: '20px' }} className="row ml-4">
                                     <Card
-                                        className={`onlinedets`}
+                                        className={`onlinedets col-4`}
                                         name={"Free"}
                                         totalsales={filteredData.length}
                                         onClick={() => handleSubCardClick('online', 'Free')}
                                         isSelected={highlightedSubCards.onlineFree}
                                     />
                                     {highlightedSubCards.onlineFree && (
-                                        <div style={{ marginLeft: '40px' }}>
-                                            <Card className="awifs" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
+                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                                         </div>
                                     )}
                                     <Card
-                                        className={`onlinedets`}
+                                        className={`onlinedets col-4`}
                                         name={"Paid"}
                                         totalsales={filteredData.length}
                                         onClick={() => handleSubCardClick('online', 'Paid')}
                                         isSelected={highlightedSubCards.onlinePaid}
                                     />
                                     {highlightedSubCards.onlinePaid && (
-                                        <div style={{ marginLeft: '40px' }}>
-                                            <Card className="awifs" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                                            <Card className="sentinel" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                                            <Card className="liss4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                                        <div style={{ marginLeft: '40px' }} className="row ml-4">
+                                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                                         </div>
                                     )}
                                 </div>
