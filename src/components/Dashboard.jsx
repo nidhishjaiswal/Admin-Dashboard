@@ -168,7 +168,7 @@ function Dashboard() {
                         </h5>
                     }
                 </div>
-                <div className="d-flex justify-content-end mb-1">
+                <div className="d-flex justify-content-end mb-1 mt-n2">
                     <h5>
                         <Clock />
                     </h5>
