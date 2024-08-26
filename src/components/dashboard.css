@@ -43,8 +43,8 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 100px; /* Adjust this value to position the cards vertically */
-    left: 20px; /* Adjust this value to position the cards horizontally */
+    top: 100px;
+    left: 20px;
     z-index: 1000;
 }
 
