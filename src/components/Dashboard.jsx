@@ -105,11 +105,19 @@ function Dashboard() {
             online: false,
         }));
         // Reset sub-cards when switching main cards
-        setHighlightedSubCards((prev) => ({
-            ...prev,
+        setHighlightedSubCards({
             satelliteFree: false,
             satellitePaid: false,
-        }));
+            vectorFree: false,
+            vectorPaid: false,
+            onlineFree: false,
+            onlinePaid: false,
+            subCards: {
+                AWIFS: false,
+                Sentinel: false,
+                LISS4: false,
+            },
+        });
     };
 
     const handleVectorClick = () => {
@@ -118,11 +126,19 @@ function Dashboard() {
             vector: !prev.vector,
             online: false,
         }));
-        setHighlightedSubCards((prev) => ({
-            ...prev,
+        setHighlightedSubCards({
+            satelliteFree: false,
+            satellitePaid: false,
             vectorFree: false,
             vectorPaid: false,
-        }));
+            onlineFree: false,
+            onlinePaid: false,
+            subCards: {
+                AWIFS: false,
+                Sentinel: false,
+                LISS4: false,
+            },
+        });
     };
 
     const handleOnlineClick = () => {
@@ -131,19 +147,35 @@ function Dashboard() {
             vector: false,
             online: !prev.online,
         }));
-        setHighlightedSubCards((prev) => ({
-            ...prev,
+        setHighlightedSubCards({
+            satelliteFree: false,
+            satellitePaid: false,
+            vectorFree: false,
+            vectorPaid: false,
             onlineFree: false,
             onlinePaid: false,
-        }));
+            subCards: {
+                AWIFS: false,
+                Sentinel: false,
+                LISS4: false,
+            },
+        });
     };
 
     // Sub-card click handlers
     const handleSubCardClick = (parentCard, subCard) => {
         setHighlightedSubCards((prev) => ({
-            ...prev,
-            [`${parentCard}Free`]: subCard === 'Free' ? !prev[`${parentCard}Free`] : false,
-            [`${parentCard}Paid`]: subCard === 'Paid' ? !prev[`${parentCard}Paid`] : false,
+            satelliteFree: parentCard === 'satellite' && subCard === 'Free' ? !prev.satelliteFree : false,
+            satellitePaid: parentCard === 'satellite' && subCard === 'Paid' ? !prev.satellitePaid : false,
+            vectorFree: parentCard === 'vector' && subCard === 'Free' ? !prev.vectorFree : false,
+            vectorPaid: parentCard === 'vector' && subCard === 'Paid' ? !prev.vectorPaid : false,
+            onlineFree: parentCard === 'online' && subCard === 'Free' ? !prev.onlineFree : false,
+            onlinePaid: parentCard === 'online' && subCard === 'Paid' ? !prev.onlinePaid : false,
+            subCards: {
+                AWIFS: false,
+                Sentinel: false,
+                LISS4: false,
+            },
         }));
     };
 
@@ -164,7 +196,7 @@ function Dashboard() {
                 <div className="">
                     {startDate && endDate &&
                         <h5>
-                           Custom Range: <span>{moment(startDate).startOf('day').format('Do MMMM YYYY')} - {moment(endDate).startOf('day').format('Do MMMM YYYY')}</span>
+                            Custom Range: <span>{moment(startDate).startOf('day').format('Do MMMM YYYY')} - {moment(endDate).startOf('day').format('Do MMMM YYYY')}</span>
                         </h5>
                     }
                 </div>
