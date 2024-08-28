@@ -53,6 +53,17 @@ function Dashboard() {
         }
     };
 
+    // const newData = async () => {
+    //     try {
+    //         const res = await axios.get('http://localhost:5000/orderDetails');
+    //         const data = res.data;
+    //         setOrderDetails(data);
+    //         filterData(data, startDate, endDate);
+    //     } catch (e) {
+    //         console.log(e.message);
+    //     }
+    // };
+
     useEffect(() => {
         orderData();
     }, []);
