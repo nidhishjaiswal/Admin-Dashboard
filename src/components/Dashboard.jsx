@@ -21,6 +21,10 @@ function Dashboard() {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
+    const [satelliteData, setSatelliteData] = useState({});
+    const [vectorData, setVectorData] = useState({});
+    const [onlineData, setOnlineData] = useState({});
+
     // States for main details and sub-card selection
     const [highlightedCards, setHighlightedCards] = useState({
         satellite: false,
@@ -42,64 +46,22 @@ function Dashboard() {
         },
     });
 
-    const orderData = async () => {
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/orderDetails');
-            const data = res.data;
-            setOrderDetails(data);
-            filterData(data, startDate, endDate);
+            const satelliteRes = await axios.get('http://localhost:7000/satellite');
+            const vectorRes = await axios.get('http://localhost:7000/vector');
+            const onlineRes = await axios.get('http://localhost:7000/online');
+
+            setSatelliteData(satelliteRes.data);
+            setVectorData(vectorRes.data);
+            setOnlineData(onlineRes.data);
         } catch (e) {
             console.log(e.message);
         }
-    };
-
-    // const newData = async () => {
-    //     try {
-    //         const res = await axios.get('http://localhost:5000/orderDetails');
-    //         const data = res.data;
-    //         setOrderDetails(data);
-    //         filterData(data, startDate, endDate);
-    //     } catch (e) {
-    //         console.log(e.message);
-    //     }
-    // };
-
-    useEffect(() => {
-        orderData();
-    }, []);
-
-    useEffect(() => {
-        filterData(orderDetails, startDate, endDate);
-    }, [startDate, endDate, orderDetails]);
-
-    const filterData = (data, startDate, endDate) => {
-        let filtered = data;
-
-        if (startDate && endDate) {
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-            filtered = data.filter((item) => {
-                const itemDate = new Date(item.date);
-                return itemDate >= start && itemDate <= end;
-            });
-        }
-
-        let count = 0;
-        let totalAmount = 0;
-
-        filtered.forEach((item) => {
-            if (item.status === 'Approved') {
-                count++;
-            }
-            const amount = parseFloat(item.total_amount);
-            if (!isNaN(amount)) {
-                totalAmount += amount;
-            }
-        });
-
-        setFilteredData(filtered);
-        setApprovedCount(count);
-        setTotalAmount(totalAmount);
     };
 
     const handleFilterChange = (dates) => {
@@ -115,20 +77,7 @@ function Dashboard() {
             vector: false,
             online: false,
         }));
-        // Reset sub-cards when switching main cards
-        setHighlightedSubCards({
-            satelliteFree: false,
-            satellitePaid: false,
-            vectorFree: false,
-            vectorPaid: false,
-            onlineFree: false,
-            onlinePaid: false,
-            subCards: {
-                AWIFS: false,
-                Sentinel: false,
-                LISS4: false,
-            },
-        });
+        resetSubCardSelection();
     };
 
     const handleVectorClick = () => {
@@ -137,19 +86,7 @@ function Dashboard() {
             vector: !prev.vector,
             online: false,
         }));
-        setHighlightedSubCards({
-            satelliteFree: false,
-            satellitePaid: false,
-            vectorFree: false,
-            vectorPaid: false,
-            onlineFree: false,
-            onlinePaid: false,
-            subCards: {
-                AWIFS: false,
-                Sentinel: false,
-                LISS4: false,
-            },
-        });
+        resetSubCardSelection();
     };
 
     const handleOnlineClick = () => {
@@ -158,6 +95,10 @@ function Dashboard() {
             vector: false,
             online: !prev.online,
         }));
+        resetSubCardSelection();
+    };
+
+    const resetSubCardSelection = () => {
         setHighlightedSubCards({
             satelliteFree: false,
             satellitePaid: false,
@@ -199,6 +140,24 @@ function Dashboard() {
                 LISS4: cardName === 'LISS4',
             },
         }));
+    };
+
+    const getSubCardData = (parentCard, subCard, subCardDetail) => {
+        let data = {};
+
+        if (parentCard === 'satellite') {
+            data = satelliteData;
+        } else if (parentCard === 'vector') {
+            data = vectorData;
+        } else if (parentCard === 'online') {
+            data = onlineData;
+        }
+
+        if (data && data[subCard.toLowerCase()]) {
+            return data[subCard.toLowerCase()][subCardDetail];
+        }
+
+        return null;
     };
 
     return (
@@ -249,14 +208,14 @@ function Dashboard() {
                             <Card
                                 className={`satellitedets col-6`}
                                 name={"Free"}
-                                totalsales={filteredData.length}
+                                totalsales={getSubCardData('satellite', 'Free', 'LISS4')?.approved || 0}
                                 onClick={() => handleSubCardClick('satellite', 'Free')}
                                 isSelected={highlightedSubCards.satelliteFree}
                             />
                             <Card
                                 className={`satellitedets col-6`}
                                 name={"Paid"}
-                                totalsales={filteredData.length}
+                                totalsales={getSubCardData('satellite', 'Paid', 'LISS4')?.approved || 0}
                                 onClick={() => handleSubCardClick('satellite', 'Paid')}
                                 isSelected={highlightedSubCards.satellitePaid}
                             />
@@ -265,17 +224,17 @@ function Dashboard() {
 
                     {highlightedSubCards.satelliteFree && (
                         <div className="row ml-4" style={{ marginLeft: '60px' }}>
-                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={getSubCardData('satellite', 'Free', 'AWIFS')?.approved || 0} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={getSubCardData('satellite', 'Free', 'Sentinel')?.approved || 0} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={getSubCardData('satellite', 'Free', 'LISS4')?.approved || 0} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
                     )}
 
                     {highlightedSubCards.satellitePaid && (
                         <div className="row ml-4" style={{ marginLeft: '60px' }}>
-                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={getSubCardData('satellite', 'Paid', 'AWIFS')?.approved || 0} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={getSubCardData('satellite', 'Paid', 'Sentinel')?.approved || 0} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={getSubCardData('satellite', 'Paid', 'LISS4')?.approved || 0} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
                     )}
 
@@ -285,14 +244,14 @@ function Dashboard() {
                             <Card
                                 className={`vectordets col-6`}
                                 name={"Free"}
-                                totalsales={filteredData.length}
+                                totalsales={getSubCardData('vector', 'Free', 'LISS4')?.approved || 0}
                                 onClick={() => handleSubCardClick('vector', 'Free')}
                                 isSelected={highlightedSubCards.vectorFree}
                             />
                             <Card
                                 className={`vectordets col-6`}
                                 name={"Paid"}
-                                totalsales={filteredData.length}
+                                totalsales={getSubCardData('vector', 'Paid', 'LISS4')?.approved || 0}
                                 onClick={() => handleSubCardClick('vector', 'Paid')}
                                 isSelected={highlightedSubCards.vectorPaid}
                             />
@@ -301,17 +260,17 @@ function Dashboard() {
 
                     {highlightedSubCards.vectorFree && (
                         <div className="row ml-4" style={{ marginLeft: '60px' }}>
-                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={getSubCardData('vector', 'Free', 'AWIFS')?.approved || 0} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={getSubCardData('vector', 'Free', 'Sentinel')?.approved || 0} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={getSubCardData('vector', 'Free', 'LISS4')?.approved || 0} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
                     )}
 
                     {highlightedSubCards.vectorPaid && (
                         <div className="row ml-4" style={{ marginLeft: '60px' }}>
-                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={getSubCardData('vector', 'Paid', 'AWIFS')?.approved || 0} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={getSubCardData('vector', 'Paid', 'Sentinel')?.approved || 0} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={getSubCardData('vector', 'Paid', 'LISS4')?.approved || 0} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
                     )}
 
@@ -321,14 +280,14 @@ function Dashboard() {
                             <Card
                                 className={`onlinedets col-6`}
                                 name={"Free"}
-                                totalsales={filteredData.length}
+                                totalsales={getSubCardData('online', 'Free', 'AWIFS')?.approved || 0}
                                 onClick={() => handleSubCardClick('online', 'Free')}
                                 isSelected={highlightedSubCards.onlineFree}
                             />
                             <Card
                                 className={`onlinedets col-6`}
                                 name={"Paid"}
-                                totalsales={filteredData.length}
+                                totalsales={getSubCardData('online', 'Paid', 'AWIFS')?.approved || 0}
                                 onClick={() => handleSubCardClick('online', 'Paid')}
                                 isSelected={highlightedSubCards.onlinePaid}
                             />
@@ -337,17 +296,17 @@ function Dashboard() {
 
                     {highlightedSubCards.onlineFree && (
                         <div className="row ml-4" style={{ marginLeft: '60px' }}>
-                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={getSubCardData('online', 'Free', 'AWIFS')?.approved || 0} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={getSubCardData('online', 'Free', 'Sentinel')?.approved || 0} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={getSubCardData('online', 'Free', 'LISS4')?.approved || 0} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
                     )}
 
                     {highlightedSubCards.onlinePaid && (
                         <div className="row ml-4" style={{ marginLeft: '60px' }}>
-                            <Card className="awifs col-4" name={"AWIFS"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
-                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
-                            <Card className="liss4 col-4" name={"LISS4"} totalsales={filteredData.length} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
+                            <Card className="awifs col-4" name={"AWIFS"} totalsales={getSubCardData('online', 'Paid', 'AWIFS')?.approved || 0} onClick={() => handleSubCardsSelection('AWIFS')} isSelected={highlightedSubCards.subCards.AWIFS} />
+                            <Card className="sentinel col-4" name={"Sentinel"} totalsales={getSubCardData('online', 'Paid', 'Sentinel')?.approved || 0} onClick={() => handleSubCardsSelection('Sentinel')} isSelected={highlightedSubCards.subCards.Sentinel} />
+                            <Card className="liss4 col-4" name={"LISS4"} totalsales={getSubCardData('online', 'Paid', 'LISS4')?.approved || 0} onClick={() => handleSubCardsSelection('LISS4')} isSelected={highlightedSubCards.subCards.LISS4} />
                         </div>
                     )}
 
