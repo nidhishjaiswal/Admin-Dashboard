@@ -1,24 +1,6 @@
 {
   "orderDetails": [
     {
-      "order_id": "#00055",
-      "date": "2024-08-09",
-      "time": "06:02:53",
-      "customer_name": "Vihaan Singh",
-      "email": "vihaan.singh@example.com",
-      "customer_id": 2523,
-      "company": "Reliance Industries",
-      "product_name": "AWIFS",
-      "total_area": 508.47,
-      "total_amount": 4321.995,
-      "requested_data": {
-        "latitude": 23.1765,
-        "longitude": 75.7885
-      },
-      "status": "Approved",
-      "id": "6d53"
-    },
-    {
       "order_id": "#0001",
       "date": "2022-03-17",
       "time": "06:02:53",
